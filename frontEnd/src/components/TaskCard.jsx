@@ -10,8 +10,8 @@ import {
   Trash2,
 } from "lucide-react";
 import { Input } from "./ui/input";
-import axios from "axios";
 import { toast } from "sonner";
+import api from "@/lib/axios";
 
 const TaskCard = ({ task, index, handleTaskChanged }) => {
   const [isEditting, setIsEditting] = useState(false); // sửa giá trị cho task title
@@ -28,7 +28,7 @@ const TaskCard = ({ task, index, handleTaskChanged }) => {
   const updateTask = async () => {
     try {
       setIsEditting(false);
-      await axios.put(`http://localhost:5001/api/tasks/${task._id}`, {
+      await api.put(`/tasks/${task._id}`, {
         title: updateTaskTitle,
       });
       toast.success(`Cây đã được đổi thành ${updateTaskTitle}`);
@@ -48,7 +48,7 @@ const TaskCard = ({ task, index, handleTaskChanged }) => {
       //       } else {
       //         toast.info(`Bạn đã chọn giữ lại cây "${task.title}"`);
       //       }
-      await axios.delete(`http://localhost:5001/api/tasks/${task._id}`);
+      await api.delete(`/tasks/${task._id}`);
       toast.success(`Cây ${task.title} đã được xóa thành công`);
       handleTaskChanged();
     } catch (error) {
@@ -61,13 +61,13 @@ const TaskCard = ({ task, index, handleTaskChanged }) => {
   const toggleTaskCompleteButton = async () => {
     try {
       if (task.status === "active") {
-        await axios.put(`http://localhost:5001/api/tasks/${task._id}`, {
+        await api.put(`/tasks/${task._id}`, {
           status: "complete",
           completedAt: new Date().toISOString(),
         });
         handleTaskChanged();
       } else {
-        await axios.put(`http://localhost:5001/api/tasks/${task._id}`, {
+        await api.put(`/tasks/${task._id}`, {
           status: "active",
           completedAt: null,
         });
