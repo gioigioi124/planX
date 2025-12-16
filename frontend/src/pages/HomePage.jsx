@@ -29,18 +29,11 @@ const HomePage = () => {
   // hàm gọi API và lấy nhiệm vụ
   const fetchTasks = async () => {
     try {
-      // const res = await fetch("http://localhost:5001/api/tasks");
-      // lấy giá trị trả về từ backend
-      // const data = await res.json(); // nhận lại giá trị json từ response
-
       const res = await api.get(`/tasks?filter=${dateQuery}`);
-      // lấy giá trị nhanh bằng axios
-      //res.data chính là res.status(200).json({ tasks, activeCount, completeCount })
-
       setTaskBuffer(res.data.tasks); // gán giá trị cho taskBuffer
       setActiveTaskCount(res.data.activeCount); // gán giá trị cho activeTaskCount
       setCompleteTaskCount(res.data.completeCount); // gán giá trị cho completeTaskCount
-      // console.log(res.data);
+      console.log(res.data);
     } catch (error) {
       console.log("lỗi xảy ra khi truy xuất tasks", error);
       toast.error("lỗi xảy ra khi truy xuất tasks");

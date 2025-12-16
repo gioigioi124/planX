@@ -10,10 +10,11 @@ dotenv.config();
 
 const PORT = process.env.PORT || 5001;
 const __dirname = path.resolve();
+
 //  tạo ứng dụng bằng express
 const app = express();
 
-if (process.env.NODE_ENV !== "production") {
+if (process.env.NODE_ENV === "development") {
   // thêm middleWare trong môi trường dev
   app.use(cors());
 }

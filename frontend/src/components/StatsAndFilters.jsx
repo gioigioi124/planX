@@ -28,7 +28,7 @@ const StatsAndFilters = ({
         </Badge>
       </div>
       {/* phần Filter, map qua mỗi key để tạo button filter */}
-      <div className="flex flex-col sm:flex-row gap-2">
+      <div className="flex flex-row gap-2">
         {Object.keys(FilterType).map((type) => (
           <Button
             key={type}
